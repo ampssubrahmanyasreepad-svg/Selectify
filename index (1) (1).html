@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- CO1: HTML document structure and basic web page setup -->
+    <meta charset="UTF-8">
+    <title>Selectify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<section id="login" class="section active">
+    <h2 class="section-title">Welcome to Selectify</h2>
+
+    <div class="login-container">
+        <div class="login-card">
+            <h3>User Access</h3>
+            <button onclick="loginUser()">Login as User</button>
+        </div>
+
+        <div class="login-card">
+            <h3>Company Access</h3>
+               <!-- CO4: Event handling using JavaScript -->
+            <button onclick="loginCompany()">Login as Company</button>
+        </div>
+    </div>
+</section>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar" style="display:none;">
+    <div class="logo">
+        Select<span style="color:#00f2ff;">ify</span>
+    </div>
+    <ul class="nav-links">
+        <li onclick="showSection('dashboard')">Dashboard</li>
+        <li onclick="showSection('upload')">Upload</li>
+        <li onclick="showSection('analyze')" id="analyzeNav">Analyze</li>
+        <li onclick="showSection('result')" id="resultNav">Result</li>
+        <li onclick="toggleTheme()">🌙/☀</li>
+        <li onclick="logout()">Logout</li>
+    </ul>
+</nav>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="section">
+    <h2 class="section-title">Dashboard</h2>
+
+    <div class="dashboard-cards">
+        <div class="dash-card">
+            <h3>Total Resumes</h3>
+            <p id="totalResumes">0</p>
+        </div>
+
+        <div class="dash-card company-only">
+            <h3>Shortlisted</h3>
+            <p id="shortlistedCount">0</p>
+        </div>
+
+        <div class="dash-card company-only">
+            <h3>Rejected</h3>
+            <p id="rejectedCount">0</p>
+        </div>
+    </div>
+
+    <!-- COMPANY ONLY CLEAR BUTTON -->
+    <div class="company-only" style="text-align:center; margin-top:40px;">
+        <button onclick="clearData()">🗑 Clear All Data</button>
+    </div>
+</section>
+
+<!-- UPLOAD -->
+<section id="upload" class="section">
+    <h2 class="section-title">Upload Resume</h2>
+    <div class="card">
+        <input type="text" id="name" placeholder="Candidate Name">
+        <input type="number" id="skills" placeholder="Skills Count">
+        <input type="number" id="exp" placeholder="Experience (Years)">
+        <button onclick="addResume()">Upload Resume</button>
+    </div>
+</section>
+
+<!-- ANALYZE -->
+<section id="analyze" class="section">
+    <h2 class="section-title">Evaluate Job Requirements</h2>
+    <div class="card">
+        <input type="number" id="reqSkills" placeholder="Required Skills">
+        <input type="number" id="minExp" placeholder="Minimum Experience">
+        <button onclick="analyze()">Evaluate Candidates</button>
+    </div>
+</section>
+
+<!-- RESULT -->
+<section id="result" class="section">
+    <h2 class="section-title">Screening Results</h2>
+
+    <div class="result-controls company-only">
+        <input type="text" id="searchInput" placeholder="Search candidate..." onkeyup="searchCandidate()">
+        <select onchange="sortResults(this.value)">
+            <option value="score">Sort by Score</option>
+            <option value="skills">Sort by Skills</option>
+            <option value="exp">Sort by Experience</option>
+        </select>
+    </div>
+
+    <div id="resultsContainer"></div>
+</section>
+
+<footer>
+    <p>© 2026 Selectify. All Rights Reserved.</p>
+</footer>
+<!-- CO3 & CO4: Linking JavaScript functionality -->
+<script src="script.js"></script>
+</body>
+</html>
